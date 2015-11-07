@@ -1,0 +1,112 @@
+﻿@model BasicCrud.ViewModels.TasksDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@Html.Partial("Alert")
+
+<h2>Details</h2>
+
+<hr />
+
+<div class="row">
+    <div class="container">
+        <dl class="dl-horizontal pull-left">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <br />
+            
+            @if (Model.ListType == "General List With Dates")
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+                
+                <br />
+                
+                <dt>
+                    @Html.DisplayNameFor(model => model.FinishDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FinishDate)
+                </dd>
+                <br />
+            }
+            
+            @if (Model.ListType == "Shopping List")
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Quantity)
+                </dd>
+                <br/>
+            }
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Details)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Details)
+            </dd>
+        </dl>
+
+        <div class="pull-right">
+            <p class="pull-right">
+                <a href="@Url.Action("Edit", new { Model.Id })" class="btn btn-primary">
+                    <i class="fa fa-edit icon"></i>
+                    Edit
+                </a>
+            </p>
+            <p>
+                <a href="" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-remove icon"></i>
+                    Delete
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<a href="@Url.Action("Index", new { id = Model.ListId })" class="btn btn-default">
+    <i class="fa fa-arrow-left icon"></i>
+    Back to Tasks
+</a>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete List @Model.Name?</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete @Model.Name?
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Delete", "Tasks", new { id = Model.Id, listId = Model.ListId }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Confirm" class="btn btn-default" />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

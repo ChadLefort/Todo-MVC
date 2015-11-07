@@ -1,0 +1,74 @@
+﻿@using System.Web.UI.WebControls
+@using BasicCrud.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="description" content="Simple todo list application" />
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("To-do", "Index", "Lists", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="pull-right visible-xs" style="padding: 8px 8px">
+                    @if (ViewContext.RouteData.Values["controller"].ToString() == "Lists")
+                    {
+                        <a href="@Url.Action("Create")" class="btn btn-default">
+                            <i class="fa fa-list icon"></i>
+                            Create New List
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Create", new { id = Model.ListId })" class="btn btn-default">
+                            <i class="fa fa-pencil-square-o icon"></i> 
+                            Create New Task
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="pull-right hidden-xs" style="padding-top: 8px;">
+                @if (ViewContext.RouteData.Values["controller"].ToString() == "Lists")
+                {
+                    <a href="@Url.Action("Create")" class="btn btn-default">
+                        <i class="fa fa-list icon"></i>
+                        Create New List
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Create", new { id = Model.ListId })" class="btn btn-default">
+                        <i class="fa fa-pencil-square-o icon"></i> 
+                        Create New Task
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="padding-top: 20px;">
+        @RenderBody()
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p class="text-muted">Custom Built by Chad Lefort</p>
+        </div>
+    </div>
+
+    <div class="scrollup" href="#"><i class="fa fa-caret-square-o-up fa-3x"></i></div>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

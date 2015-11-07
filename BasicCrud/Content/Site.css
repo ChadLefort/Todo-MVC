@@ -1,0 +1,111 @@
+﻿/* Custom page CSS
+-------------------------------------------------- */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: url("../images/crossword.png") repeat;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.container .text-muted {
+  margin: 18px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.table-padding {
+    padding-top: 10px;
+    padding-right: 15px;
+}
+
+.table-link {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 10px 15px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.icon {
+    padding-right: 6px;
+}
+
+/* Custom colors
+-------------------------------------------------- */
+.brand {
+    color: #ffffff
+}
+
+.check {
+    color: #18bc9c;
+}
+
+.minus {
+    color: #e74c3c;
+}
+
+
+/* Scroll up arrow
+-------------------------------------------------- */
+.scrollup{
+    width: 39px;
+    height: 45px;
+    opacity: 1;
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    display: none;
+    cursor: pointer;
+    color: #95a5a6;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #2c3e50;
+}

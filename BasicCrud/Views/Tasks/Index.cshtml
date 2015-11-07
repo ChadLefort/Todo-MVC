@@ -1,0 +1,83 @@
+﻿@using Microsoft.Ajax.Utilities
+@model BasicCrud.ViewModels.TasksIndex
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+@Html.Partial("Alert")
+
+<h2>@Model.ListName</h2>
+
+<hr/>
+<div class="panel panel-primary">
+    <div class="panel-heading" style="height: 65px">
+        <div class="pull-left">
+            <p class="table-padding">Tasks</p>
+        </div>
+
+        <div class="pull-right">
+            <a href="" onclick="return false" class="btn btn-default" id="hide">Hide Completed</a>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <tbody id="sortableTasks">
+            @if (Model.Exist)
+            {
+                foreach (var task in Model.Tasks)
+                {
+                    <tr id="@task.Id">
+                        <td>
+                            <div class="visible-lg">
+                                @if (task.Details == null)
+                                {
+                                    <a href="@Url.Action("Details", new {id = task.Id})" class="table-link" data-content="None" rel="popover" data-placement="right" data-trigger="hover">@task.Name</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Details", new {id = task.Id})" class="table-link" data-content="@task.Details" rel="popover" data-placement="right" data-trigger="hover">@task.Name</a>
+                                }
+                            </div>
+                            <div class="hidden-lg">
+                                <a href="@Url.Action("Details", new {id = task.Id})" class="table-link">@task.Name</a>
+                            </div>
+                        </td>
+                        @if (@task.IsFinished)
+                        {
+                            <td class="text-right">
+                                <a href="" onclick=" return false ">
+                                    <i class="fa fa-check-square fa-3x check" id="completed_@task.Id" data-id="@task.Id" data-value="true"></i>
+                                </a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-right">
+                                <a href="" onclick=" return false ">
+                                    <i class="fa fa-minus-square fa-3x minus" id="completed_@task.Id" data-id="@task.Id" data-value="false"></i>
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        <p class="table-link">You currently have no tasks for this list. <a href="@Url.Action("Create", new { id = Model.ListId })">Click here to create one!</a></p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr/>
+
+<a href="@Url.Action("Index", "Lists")" class="btn btn-default">
+    <i class="fa fa-arrow-left icon"></i>
+    Back to Lists
+</a>
+
+<input type="hidden" id="listId" name="listId" value="@Model.ListId" />
